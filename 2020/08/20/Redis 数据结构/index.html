@@ -17,7 +17,7 @@
   <meta name="description" content="欢迎来到崔小土的世界">
   <meta name="author" content="cuixiaotu">
   <meta name="keywords" content="">
-  <title>Redis-01 数据结构 - 崔小土的世界</title>
+  <title>Redis 数据结构 - 崔小土的世界</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -208,7 +208,7 @@
               <h1 id="Redis-数据结构"><a href="#Redis-数据结构" class="headerlink" title="Redis 数据结构"></a>Redis 数据结构</h1><p>最近又重新看了一遍Redis 整理一下阅读笔记</p>
 <h2 id="1-redis支持的数据结构"><a href="#1-redis支持的数据结构" class="headerlink" title="1.redis支持的数据结构"></a>1.redis支持的数据结构</h2><p>字符串，哈希，列表，集合，有序集合<br>string，hash,list,set,sorted set</p>
 <h2 id="2-redis内部的数据结构"><a href="#2-redis内部的数据结构" class="headerlink" title="2.redis内部的数据结构"></a>2.redis内部的数据结构</h2><p>简单动态字符串<br>双向链表<br>压缩链表<br>哈希表<br>跳表<br>整数数组</p>
-<h2 id="3-数据结构关系如下"><a href="#3-数据结构关系如下" class="headerlink" title="3.数据结构关系如下"></a>3.数据结构关系如下</h2><p><img src="imgs/redis01_0.jpg" srcset="/img/loading.gif" alt="" title="数据结构关系"></p>
+<h2 id="3-数据结构关系如下"><a href="#3-数据结构关系如下" class="headerlink" title="3.数据结构关系如下"></a>3.数据结构关系如下</h2><p><img src="redis01_0.jpg" srcset="/img/loading.gif" alt=""></p>
 <h2 id="4-内部数据结构介绍"><a href="#4-内部数据结构介绍" class="headerlink" title="4.内部数据结构介绍"></a>4.内部数据结构介绍</h2><h3 id="4-1-简单动态字符串"><a href="#4-1-简单动态字符串" class="headerlink" title="4.1 简单动态字符串"></a>4.1 简单动态字符串</h3><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sdshdr</span> &#123;</span>
     <span class="hljs-comment">//记录buf数组中已使用字节的数量</span>
     <span class="hljs-comment">//等于SDS所保存字符串的长度</span>
@@ -348,8 +348,8 @@
 <p>升级</p>
 <p>1) 根据新元素的类型 扩展整数集合底层数组空间大小 并为新元素分配空间<br>2) 将底层数组所有的元素转换为新元素类型 将类型转换后的元素放到正确的位置上去<br>3) 将新元素添加按到底层数组里</p>
 <p>降级<br>不支持降级，故升级后的编码 即使大元素被删 也不会恢复为之前的编码</p>
-<h3 id="4-6-压缩列表"><a href="#4-6-压缩列表" class="headerlink" title="4.6 压缩列表"></a>4.6 压缩列表</h3><p><img src="imgs/redis01_1.jpg" srcset="/img/loading.gif" alt=""></p>
-<p><img src="imgs/redis01_2.jpg" srcset="/img/loading.gif" alt=""></p>
+<h3 id="4-6-压缩列表"><a href="#4-6-压缩列表" class="headerlink" title="4.6 压缩列表"></a>4.6 压缩列表</h3><p><img src="redis01_1.jpg" srcset="/img/loading.gif" alt=""></p>
+<p><img src="redis01_2.jpg" srcset="/img/loading.gif" alt=""></p>
 <p>压缩列表是Redis为了节约内存而开发的,是由一系列特殊编码的连续内存块组成的顺序型(sequential)数据结枃。一个压缩列表可以包含任意多个节点(entry),每个节点可以保存一个字节数组或者一个整数值  </p>
 <p>参考: </p>
 <ul>
@@ -564,7 +564,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Redis-01 数据结构&nbsp;",
+        "Redis 数据结构&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

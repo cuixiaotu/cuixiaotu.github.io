@@ -219,7 +219,7 @@
 &#125;</code></pre>
 
 <h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><p>在树的任意一个节点，其左子树的每个节点的值都要小于这个节点的值，而右子树节点的值都要大于这个节点的值。（基于二分查找，满二叉查找数）</p>
-<p><img src="%E7%BA%A2%E9%BB%91%E6%A0%91/binary_search_tree.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="binary_search_tree.png" srcset="/img/loading.gif" alt=""></p>
 <pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchTree</span> </span>&#123;
   <span class="hljs-keyword">private</span> Node tree;
 
@@ -333,7 +333,7 @@
 </tbody></table>
 <p>二叉查找树平均情况下 性能还是不错的，但是在增删的情况下，无法保持平衡，最终可能退化为链表导致性能大幅度下降。</p>
 <h2 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h2><p>2-3查找树 ： 一棵空树或由2-结点和3-结点组成的树<br>2-结点：含一个键和两个链接，左链接指向的2-3树中的结点都小于该结点，右链接指向的2-3树中的结点都大于该结点s<br>3-结点：含两个键和三个链接，左链接指向的2-3树中的结点都小于该结点，右链接指向的2-3树中的结点都大于该结点，中结点指向的结点的键位于该结点两个键的中间</p>
-<p><img src="%E7%BA%A2%E9%BB%91%E6%A0%91/2-3_tree.png" srcset="/img/loading.gif" alt=""></p>
+<p><img src="2-3_tree.png" srcset="/img/loading.gif" alt=""></p>
 <h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>从根节点开始，若和节点中的</p>
 <h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>1） 如果是空树，创建一个节点并存入值<br>2） 否则找到叶子节点<br>3） 如果叶子节点只有一个值，新值也存入该节点<br>4） 如果叶子节点超过两个值，分离该节点，并把三个值的中位值提升至父节点<br>5） 如果父节点有三个值，继续4的操作 直至根节点</p>
 <pre><code class="hljs java">
@@ -345,8 +345,6 @@
 <h2 id="红黑树-1"><a href="#红黑树-1" class="headerlink" title="红黑树"></a>红黑树</h2><p>1) 根节点是黑色的<br>2) 每个节点非黑既红<br>2) 每个叶子节点都是黑色的空节点（nil）<br>3) 任何相邻的节点都不能同时为红色<br>4) 每个节点 到达其可达的叶子节点的所有路径都包含相同数目的黑色节点</p>
 <p><img src="red_black_tree.png" srcset="/img/loading.gif" alt=""></p>
 <p>（可以结合上面的2-3图一起看哟 画图不易）</p>
-<br />
-
 <p>旋转还是挺复杂的 有空再来慢慢画图和编码 留一个坑在这里 </p>
 
             </article>
@@ -382,7 +380,7 @@
                     
                       <a href="/2020/08/20/Redis%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Redis-01 数据结构</span>
+                        <span class="hidden-mobile">Redis 数据结构</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
