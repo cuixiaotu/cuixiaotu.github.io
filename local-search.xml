@@ -4,11 +4,36 @@
   
   
   <entry>
+    <title>E2EE</title>
+    <link href="/2021/02/20/%E7%AB%AF%E5%AF%B9%E7%AB%AF%E5%8A%A0%E5%AF%86/"/>
+    <url>/2021/02/20/%E7%AB%AF%E5%AF%B9%E7%AB%AF%E5%8A%A0%E5%AF%86/</url>
+    
+    <content type="html"><![CDATA[<p>#</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>java</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>JAVA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JAVA成神之路一</title>
     <link href="/2020/09/02/JAVA%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF%E4%B8%80/"/>
     <url>/2020/09/02/JAVA%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF%E4%B8%80/</url>
     
-    <content type="html"><![CDATA[<h1 id="JAVA成神之路一"><a href="#JAVA成神之路一" class="headerlink" title="JAVA成神之路一"></a>JAVA成神之路一</h1><h2 id="1-安装部署"><a href="#1-安装部署" class="headerlink" title="1.安装部署"></a>1.安装部署</h2><p>​    </p><ol><li><p>linux部署 还是得用openJava 其中阿里的开源dragonwell不错</p><pre><code class="hljs shell">wget https://github.com/alibaba/dragonwell8/releases/download/dragonwell-8.5.5_jdk8u275-ga/Alibaba_Dragonwell_8.5.5-GA_Linux_x64.tar.gz   tar xf Alibaba_Dragonwell_8.5.5-GA_Linux_x64.tar.gz -C /opt   JAVA_HOME=/opt/jdk8u275-b1/PATH=SPATH:$JAVA_HOME/binjava -version   // 持久化   cat &gt;&gt; ~/.bashrc</code></pre></li><li><p>window环境 只是开发的话 建议去官网直接下载<br><a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/java/technologies/javase-downloads.html</a></p></li></ol><h2 id="2-基本概念"><a href="#2-基本概念" class="headerlink" title="2.基本概念"></a>2.基本概念</h2><p>123</p><p>456</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="JAVA成神之路一"><a href="#JAVA成神之路一" class="headerlink" title="JAVA成神之路一"></a>JAVA成神之路一</h1><h2 id="1-安装部署"><a href="#1-安装部署" class="headerlink" title="1.安装部署"></a>1.安装部署</h2><p>​    </p><ol><li><p>linux部署 还是得用openJava 其中阿里的开源dragonwell不错</p><pre><code class="hljs vim">wget http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/alibaba/dragonwell8/releases/download/dragonwell-<span class="hljs-number">8.5</span>.<span class="hljs-number">5</span>_jdk8u275-ga/Alibaba_Dragonwell_8.<span class="hljs-number">5.5</span>-GA_Linux_x64.tar.gztar xf Alibaba_Dragonwell_8.<span class="hljs-number">5.5</span>-GA_Linux_x64.tar.gz -C /<span class="hljs-keyword">opt</span>JAVA_HOME=/<span class="hljs-keyword">opt</span>/jdk8u275-b1/PATH=SPATH:$JAVA_HOME/binjava -<span class="hljs-keyword">version</span>// 持久化<span class="hljs-keyword">cat</span> &gt;&gt; ~/.bashrc</code></pre></li><li><p>window环境 只是开发的话 建议去官网直接下载<br><a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/java/technologies/javase-downloads.html</a></p></li></ol><h2 id="2-基本概念"><a href="#2-基本概念" class="headerlink" title="2.基本概念"></a>2.基本概念</h2><h3 id="2-1-数据类型"><a href="#2-1-数据类型" class="headerlink" title="2.1 数据类型"></a>2.1 数据类型</h3><p>整型</p><table><thead><tr><th>数据类型</th><th>存储</th><th>范围</th><th>默认值</th></tr></thead><tbody><tr><td>byte</td><td>1字节</td><td>-128(-2^7)到127(2^7-1)</td><td>0</td></tr><tr><td>short</td><td>2字节</td><td>-32,768 (-2^15)到32,767 (2^15-1)</td><td>0</td></tr><tr><td>int</td><td>4字节</td><td>-2,147,483,648 (-2^31)到2,147,483,647 (2^31-1)</td><td>0</td></tr><tr><td>long</td><td>8字节</td><td>-9,223,372,036,854,775,808 (-2^63)到9,223,372,036, 854,775,807 (2^63-1)</td><td>0l</td></tr></tbody></table><p>浮点 float double</p><table><thead><tr><th>数据类型</th><th>存储</th><th>范围</th><th>默认值</th></tr></thead><tbody><tr><td>float</td><td>4字节</td><td>1.4E-45 （2^-149）到（2^128-1）</td><td>2.15F</td></tr><tr><td>double8</td><td>8字节</td><td>4.9E-324 （2^-1074）到1.7976931348623157E308 （2^1024-1）</td><td>3.12D</td></tr></tbody></table><p>布尔 boolean</p><p>​    false和true，用来判定逻辑条件。整型值和布尔值之间不能进行相互转换</p><p>字符 char</p><p>​    char类型描述了UTF-16编码中的一个代码单元,可以和int类型互换，对应维护的字符表。</p><h3 id="2-2-自动拆装箱"><a href="#2-2-自动拆装箱" class="headerlink" title="2.2 自动拆装箱"></a>2.2 自动拆装箱</h3><p>Java 语言是一个面向对象的语言，但是 Java 中的基本数据类型却是不面向对象的，这在实际使用时存在很多的不便（集合类中），为了解决这个不足，在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类(Wrapper Class)。</p><p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。<br>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p><p>包装类均位于 <code>java.lang</code> 包，包装类和基本数据类型的对应关系如下表所示</p><table><thead><tr><th>基本数据类型</th><th>包装类</th></tr></thead><tbody><tr><td>byte</td><td>Byte</td></tr><tr><td>boolean</td><td>Boolean</td></tr><tr><td>short</td><td>Short</td></tr><tr><td>char</td><td>Character</td></tr><tr><td>int</td><td>Integer</td></tr><tr><td>long</td><td>Long</td></tr><tr><td>float</td><td>Float</td></tr><tr><td>double</td><td>Double</td></tr></tbody></table><h3 id="2-3-字符串-String"><a href="#2-3-字符串-String" class="headerlink" title="2.3  字符串 String"></a>2.3  字符串 String</h3><p>字符串就是Unicode字符序列，一旦一个string对象在内存(堆)中被创建出来，他就无法被修改。特别要注意的是，String类的所有方法都没有改变字符串本身的值，都是返回了一个新的对象。如果你需要一个可修改的字符串，应该使用StringBuffer 或者 StringBuilder。否则会有大量时间浪费在垃圾回收上，因为每次试图修改都有新的string对象被创建出来。</p><h4 id="2-3-1-字符串的截取"><a href="#2-3-1-字符串的截取" class="headerlink" title="2.3.1 字符串的截取"></a>2.3.1 字符串的截取</h4><p>substring 截取字符串并返回其[beginIndex,endIndex-1]范围内的内容，会创建一个全新的string对象。</p><h4 id="2-3-2-字符串的拼接"><a href="#2-3-2-字符串的拼接" class="headerlink" title="2.3.2 字符串的拼接"></a>2.3.2 字符串的拼接</h4><p>concat              创建了一个字符数组，长度是已有字符串和待拼接字符串的长度之和，再把两个字符串的值复制到新的字符数组中，并使用这个字符数组创建一个                          新的String对象并返回</p><p>+                          Java提供的一个语法糖,其实现原理是使用<code>StringBuilder.append</code></p><p>StringBuilder     字符数组不是用final形容，可以修改，在拷贝字符到内部的字符数组中，如果字符数组长度不够，会进行扩展。</p><p>StringBuffer       在StringBuilder的基础上，用synchronized描述append,线程安全的</p><p>StringUtils.concat  也是通过<code>StringBuilder</code>来实现的</p><pre><code class="hljs autohotkey">性能耗时`StringBuilder`&lt;`StringBuffer`&lt;`concat`&lt;`+`&lt;`StringUtils.join</code></pre><h4 id="2-3-3-字符串的替换"><a href="#2-3-3-字符串的替换" class="headerlink" title="2.3.3 字符串的替换"></a>2.3.3 字符串的替换</h4><p>replace(CharSequence target, CharSequence replacement) ，用replacement替换所有的target，两个参数都是字符串。</p><p>replaceAll(String regex, String replacement) ，用replacement替换所有的regex匹配项，regex很明显是个正则表达式，replacement是字符串。</p><p>replaceFirst(String regex, String replacement) ，基本和replaceAll相同，区别是只替换第一个匹配项。</p>]]></content>
     
     
     <categories>
