@@ -164,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      672 字
+      892 字
     </span>
   
 
@@ -174,7 +174,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      11
        分钟
     </span>
   
@@ -216,9 +216,31 @@
 </blockquote>
 <h2 id="2-背景"><a href="#2-背景" class="headerlink" title="2.背景"></a>2.背景</h2><p>人生而自由，隐私和安全性存在于我们的DNA中，这就是我们在应用程序中内置端到端加密的原因。端到端加密后，您的消息，照片，视频，语音消息，文档，状态更新和呼叫就可以避免落入错误的人手中。</p>
 <h2 id="3-方案"><a href="#3-方案" class="headerlink" title="3.方案"></a>3.方案</h2><h3 id="3-1-RocketChat"><a href="#3-1-RocketChat" class="headerlink" title="3.1 RocketChat"></a>3.1 RocketChat</h3><p>rocketChat的端对端加密还在测试阶段，并不影响我们对其的学习。整理的流程图如下：</p>
+<p>1.客户端生成随机密码，用于sha256后生成主密钥</p>
+<p>2.客户端生成密钥对，私钥通过主密钥加密后，保存公钥和加密后的私钥到用户表</p>
+<p>3.</p>
 <p><img src="rocket-chat-e2ee.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="3-2-telegram"><a href="#3-2-telegram" class="headerlink" title="3.2 telegram"></a>3.2 telegram</h3><p><img src="/telegram-e2ee.jpg" srcset="/img/loading.gif" alt="telegram-e2ee"></p>
-
+<p>优点：</p>
+<p>1.实现简单，官方源码</p>
+<p>2.支持群聊</p>
+<p>3.加密维度 消息级</p>
+<p>4.兼容性强，之前的未加密会话可以无缝切换成加密会话</p>
+<p>缺点：</p>
+<p>1.官方方案还在Beta期</p>
+<p>2.搜索操作将找不到加密房间的加密消息</p>
+<p>3.用户和客户端保存e2ee密码，遗忘且丢失后无法解密消息</p>
+<h3 id="3-2-telegram"><a href="#3-2-telegram" class="headerlink" title="3.2 telegram"></a>3.2 telegram</h3><p>telegram加密方式</p>
+<p><img src="telegram-e2ee.jpg" srcset="/img/loading.gif" alt="telegram-e2ee"></p>
+<p>简化流程图</p>
+<p><img src="telegram.png" srcset="/img/loading.gif" alt=""></p>
+<p>优点：</p>
+<p>1.采用Diffie-Hellman加密方式，安全性高</p>
+<p>2.完善的前向保密</p>
+<p>3.加密维度 消息级</p>
+<p>缺点：</p>
+<p>1.实现复杂,计算密集不太适合node</p>
+<p>2.不支持群聊</p>
+<h3 id="3-3-WhatsApp"><a href="#3-3-WhatsApp" class="headerlink" title="3.3 WhatsApp"></a>3.3 WhatsApp</h3>
             </article>
             <hr>
             <div>
