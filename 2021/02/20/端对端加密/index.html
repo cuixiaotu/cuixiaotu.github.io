@@ -164,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      892 字
+      1.6k 字
     </span>
   
 
@@ -174,7 +174,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      19
        分钟
     </span>
   
@@ -218,29 +218,67 @@
 <h2 id="3-方案"><a href="#3-方案" class="headerlink" title="3.方案"></a>3.方案</h2><h3 id="3-1-RocketChat"><a href="#3-1-RocketChat" class="headerlink" title="3.1 RocketChat"></a>3.1 RocketChat</h3><p>rocketChat的端对端加密还在测试阶段，并不影响我们对其的学习。整理的流程图如下：</p>
 <p>1.客户端生成随机密码，用于sha256后生成主密钥</p>
 <p>2.客户端生成密钥对，私钥通过主密钥加密后，保存公钥和加密后的私钥到用户表</p>
-<p>3.</p>
+<p>3.客户端开启端对端加密会话,根据当前会话生成会话密钥，会话密钥经私钥加密后存储在订阅表中</p>
+<p>4.来往消息加解密都是通过经过本地解密后的会话密钥</p>
 <p><img src="rocket-chat-e2ee.png" srcset="/img/loading.gif" alt=""></p>
 <p>优点：</p>
-<p>1.实现简单，官方源码</p>
+<p>1.官方源码支持</p>
 <p>2.支持群聊</p>
-<p>3.加密维度 消息级</p>
-<p>4.兼容性强，之前的未加密会话可以无缝切换成加密会话</p>
+<p>3.兼容性强，之前的未加密会话可以无缝切换成加密会话</p>
 <p>缺点：</p>
 <p>1.官方方案还在Beta期</p>
 <p>2.搜索操作将找不到加密房间的加密消息</p>
-<p>3.用户和客户端保存e2ee密码，遗忘且丢失后无法解密消息</p>
-<h3 id="3-2-telegram"><a href="#3-2-telegram" class="headerlink" title="3.2 telegram"></a>3.2 telegram</h3><p>telegram加密方式</p>
-<p><img src="telegram-e2ee.jpg" srcset="/img/loading.gif" alt="telegram-e2ee"></p>
-<p>简化流程图</p>
+<h3 id="3-2-telegram"><a href="#3-2-telegram" class="headerlink" title="3.2 telegram"></a>3.2 telegram</h3><p>telegram的加密基于Diffie Hellman算法，确保共享key穿越不安全的方法。</p>
+<p>生成会话密钥</p>
+<p>1.Alice开启和Bob的加密会话，生素数p和高阶元素g</p>
+<p>2.客户端检查p是否为2048位的素数，且g为循环子组素数阶数(p-1)/2.由于g始终等于2,3,4,5,6,7,很容易完成二次互易定理。</p>
+<p>3.Alice 生成随机的a和计算<code>g_a := pow(g, a) mod dh_prime</code></p>
+<p>4.Bob接收Alice的基本信息和DH生成的最新参数配置，自身生成一个随机数b</p>
+<p>5.Bob生成最终共享密钥 key = (pow(g_a, b) mod dh_prime)</p>
+<p>6.Bob返回给Alice<code>g_b := pow(g, b) mod dh_prime</code></p>
+<p>7.Alice接收g_b，并可以得出<code>key = (pow(g_b, a) mod dh_prime)</code></p>
 <p><img src="telegram.png" srcset="/img/loading.gif" alt=""></p>
 <p>优点：</p>
-<p>1.采用Diffie-Hellman加密方式，安全性高</p>
+<p>1.采用Diffie-Hellman加密方式</p>
 <p>2.完善的前向保密</p>
 <p>3.加密维度 消息级</p>
 <p>缺点：</p>
 <p>1.实现复杂,计算密集不太适合node</p>
 <p>2.不支持群聊</p>
-<h3 id="3-3-WhatsApp"><a href="#3-3-WhatsApp" class="headerlink" title="3.3 WhatsApp"></a>3.3 WhatsApp</h3>
+<h3 id="3-3-WhatsApp"><a href="#3-3-WhatsApp" class="headerlink" title="3.3 WhatsApp"></a>3.3 WhatsApp</h3><p>基于双棘轮算法。（Signal Protocol 协议）</p>
+<p>1.用户注册时候生成Identity Key Pair,Signed Pre Key 和One-Time Pre Keys，传输给服务端并储存到用户表。</p>
+<ul>
+<li>Identity Key Pair：身份密钥对，安装时生成的长期Curve25519密钥对</li>
+<li>Signed Pre Key：签名预密钥，安装时生成的中期Curve255129密钥对</li>
+<li>One-Time Pre Keys：一次性预密钥，用于加密消息的80位值，32位用于AES-256密钥，32位用于HMAC-SHA256,16位用于IV</li>
+</ul>
+<p>2.创建一个加密会话，（除非重装APP或更换设备），则无需重建会话。</p>
+<p> （为了区分发信人和收信人，认识两位老同学Alice和Bob）</p>
+<ul>
+<li><p>Alice请求Bob的Identity Key，Signed Pre Key，和一个One-Time Pre Key。</p>
+</li>
+<li><p>服务端返回公共keys。One-Time Pre Key一旦返回则在服务端删除，若没有了且未补充生成，则不返回One-Time Pre Key。</p>
+</li>
+<li><p>Alice接收Bob的Identity Key为<code>I recipient</code>，Signed Pre Key为<code>S recipient</code>，One-Time Pre Key为<code>O recipient</code>。</p>
+</li>
+<li><p>Alice生成短暂的密钥对Curve25519,<code>E initiator。</code></p>
+</li>
+<li><p>Alice把自己的Identity Key当<code>I initiator</code>。</p>
+</li>
+<li><p>Alice计算主密钥：(如果没有One-Time Pre Keys了最后的ECDH被忽略)</p>
+<pre><code class="hljs reasonml">master_secret = <span class="hljs-constructor">ECDH(I <span class="hljs-params">initiator</span>,S <span class="hljs-params">recipient</span>)</span><span class="hljs-operator"> || </span><span class="hljs-constructor">ECDH(E <span class="hljs-params">initiator</span>,I <span class="hljs-params">recipient</span>)</span><span class="hljs-operator"> || </span><span class="hljs-constructor">ECDH(E <span class="hljs-params">initiator</span>,S <span class="hljs-params">recipient</span>)</span><span class="hljs-operator"> || </span><span class="hljs-constructor">ECDH(E <span class="hljs-params">initiator</span>,O <span class="hljs-params">recipient</span>)</span></code></pre>
+</li>
+<li><p>Alice用主密钥创建Root Key和Chain Key。</p>
+</li>
+</ul>
+<p>3.会话创建后，客户端使用AES256_CBC加密和HMAC-SHA256验证消息。Message Key随着每个消息短暂存在且变化，并且在发送或接收消息后无法重建，Message Key源自Alice的Chain Key且棘轮转发的每一条消息，另外新的ECDH协议与每个消息往返执行并创建新的Chain Key。这提供前向保密性的哈希棘轮和往返的DH棘轮。</p>
+<p>优点：</p>
+<p>1.安全系数最高</p>
+<p>2.支持加密各种附件，语音视频，群组</p>
+<p>3.完善的前向保密</p>
+<p>缺点：</p>
+<p>1.维护棘轮链</p>
+
             </article>
             <hr>
             <div>
