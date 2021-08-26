@@ -17,7 +17,7 @@
   <meta name="description" content="欢迎来到崔小土的世界">
   <meta name="author" content="cuixiaotu">
   <meta name="keywords" content="">
-  <title>归档 - 崔小土的世界</title>
+  <title>崔小土的世界</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -130,7 +130,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/background2.jpg') no-repeat center center;
+         style="background: url('/img/background1.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -159,26 +159,68 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
-  <hr>
-  
+
+  <div class="row mx-auto index-card">
     
-      
-      <p class="h5">2020</p>
     
-    <a href="/2020/07/17/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">红黑树</span>
-      <span style="float: right;">07-17</span>
-    </a>
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/07/04/just-sort/">Just Sort</a>
+
+      <a href="/2020/07/04/just-sort/" class="index-excerpt">
+        
+        
+          
+        
+        <div>排序大全排序是将一组对象按照某种逻辑顺序重新排列的过程。每次都草草的看下排序似懂非懂，知其然不知其所以然,这次用go简单的实现一下。
+
+
+1.冒泡排序思路:两两比较 轻的上浮 重的下沉
+func Bubble(comparable []int) &#123;
+    n := len(comparable)
+    for i := 0; i &lt; n; i++ &#123; //n次是必须的</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-07-04
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/algorithm/">algorithm</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/algorithm/">algorithm</a>
+            
+              <a href="/tags/go/">go</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
   
-    
-    <a href="/2020/07/04/just-sort/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Just Sort</span>
-      <span style="float: right;">07-04</span>
-    </a>
-  
-</div>
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
@@ -297,7 +339,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "Welcome to the world of cuixiaotu&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

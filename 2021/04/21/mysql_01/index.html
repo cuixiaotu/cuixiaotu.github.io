@@ -17,7 +17,7 @@
   <meta name="description" content="欢迎来到崔小土的世界">
   <meta name="author" content="cuixiaotu">
   <meta name="keywords" content="">
-  <title>红黑树 - 崔小土的世界</title>
+  <title>InnoDB In-Memory Structures - 崔小土的世界</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -153,8 +153,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-17 14:23">
-      2020年7月17日 下午
+    <time datetime="2021-04-21 10:24">
+      2021年4月21日 上午
     </time>
   </div>
 
@@ -164,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      977 字
+      368 字
     </span>
   
 
@@ -174,7 +174,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      3
        分钟
     </span>
   
@@ -205,145 +205,18 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><p>有序数组查找<br>有序数组的查找使用二分查找可以减少比较次数</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">rank</span><span class="hljs-params">(Key key)</span></span>&#123;
-    <span class="hljs-keyword">int</span> lo = <span class="hljs-number">0</span>,hi = N -<span class="hljs-number">1</span>;
-    <span class="hljs-keyword">while</span> (lo &lt;= hi)&#123;
-        <span class="hljs-keyword">int</span> mid = (hi-lo)/<span class="hljs-number">2</span> + lo;
-        <span class="hljs-keyword">int</span> cmp = key.compareTo(keys[mid]);
-        <span class="hljs-keyword">if</span> (cmp &lt; <span class="hljs-number">0</span>) hi =mid-<span class="hljs-number">1</span>;
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cmp &gt; <span class="hljs-number">0</span>) lo = mid +<span class="hljs-number">1</span>;
-        <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> mid;
-    &#125;
-    <span class="hljs-keyword">return</span> lo;
-&#125;</code></pre>
-
-<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><p>在树的任意一个节点，其左子树的每个节点的值都要小于这个节点的值，而右子树节点的值都要大于这个节点的值。（基于二分查找，满二叉查找数）</p>
-<p><img src="binary_search_tree.png" srcset="/img/loading.gif" alt=""></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchTree</span> </span>&#123;
-  <span class="hljs-keyword">private</span> Node tree;
-
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Node <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> </span>&#123;
-    Node p = tree;
-    <span class="hljs-keyword">while</span> (p != <span class="hljs-keyword">null</span>) &#123;
-      <span class="hljs-keyword">if</span> (data &lt; p.data) p = p.left;
-      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data &gt; p.data) p = p.right;
-      <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> p;
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-  &#125;
-
-  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>&#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> data;
-    <span class="hljs-keyword">private</span> Node left;
-    <span class="hljs-keyword">private</span> Node right;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Node</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> </span>&#123;
-      <span class="hljs-keyword">this</span>.data = data;
-    &#125;
-  &#125;
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> </span>&#123;
-  <span class="hljs-keyword">if</span> (tree == <span class="hljs-keyword">null</span>) &#123;
-    tree = <span class="hljs-keyword">new</span> Node(data);
-    <span class="hljs-keyword">return</span>;
-  &#125;
-
-  Node p = tree;
-  <span class="hljs-keyword">while</span> (p != <span class="hljs-keyword">null</span>) &#123;
-    <span class="hljs-keyword">if</span> (data &gt; p.data) &#123;
-      <span class="hljs-keyword">if</span> (p.right == <span class="hljs-keyword">null</span>) &#123;
-        p.right = <span class="hljs-keyword">new</span> Node(data);
-        <span class="hljs-keyword">return</span>;
-      &#125;
-      p = p.right;
-    &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// data &lt; p.data</span>
-      <span class="hljs-keyword">if</span> (p.left == <span class="hljs-keyword">null</span>) &#123;
-        p.left = <span class="hljs-keyword">new</span> Node(data);
-        <span class="hljs-keyword">return</span>;
-      &#125;
-      p = p.left;
-    &#125;
-  &#125;
-&#125;
-
-
-
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">delete</span><span class="hljs-params">(<span class="hljs-keyword">int</span> data)</span> </span>&#123;
-  Node p = tree; <span class="hljs-comment">// p指向要删除的节点，初始化指向根节点</span>
-  Node pp = <span class="hljs-keyword">null</span>; <span class="hljs-comment">// pp记录的是p的父节点</span>
-  <span class="hljs-keyword">while</span> (p != <span class="hljs-keyword">null</span> &amp;&amp; p.data != data) &#123;
-    pp = p;
-    <span class="hljs-keyword">if</span> (data &gt; p.data) p = p.right;
-    <span class="hljs-keyword">else</span> p = p.left;
-  &#125;
-  <span class="hljs-keyword">if</span> (p == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>; <span class="hljs-comment">// 没有找到</span>
-
-  <span class="hljs-comment">// 要删除的节点有两个子节点</span>
-  <span class="hljs-keyword">if</span> (p.left != <span class="hljs-keyword">null</span> &amp;&amp; p.right != <span class="hljs-keyword">null</span>) &#123; <span class="hljs-comment">// 查找右子树中最小节点</span>
-    Node minP = p.right;
-    Node minPP = p; <span class="hljs-comment">// minPP表示minP的父节点</span>
-    <span class="hljs-keyword">while</span> (minP.left != <span class="hljs-keyword">null</span>) &#123;
-      minPP = minP;
-      minP = minP.left;
-    &#125;
-    p.data = minP.data; <span class="hljs-comment">// 将minP的数据替换到p中</span>
-    p = minP; <span class="hljs-comment">// 下面就变成了删除minP了</span>
-    pp = minPP;
-  &#125;
-
-  <span class="hljs-comment">// 删除节点是叶子节点或者仅有一个子节点</span>
-  Node child; <span class="hljs-comment">// p的子节点</span>
-  <span class="hljs-keyword">if</span> (p.left != <span class="hljs-keyword">null</span>) child = p.left;
-  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p.right != <span class="hljs-keyword">null</span>) child = p.right;
-  <span class="hljs-keyword">else</span> child = <span class="hljs-keyword">null</span>;
-
-  <span class="hljs-keyword">if</span> (pp == <span class="hljs-keyword">null</span>) tree = child; <span class="hljs-comment">// 删除的是根节点</span>
-  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pp.left == p) pp.left = child;
-  <span class="hljs-keyword">else</span> pp.right = child;
-&#125;</code></pre>
-
-
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th align="center">查找</th>
-<th align="right">插入</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>顺序查询</td>
-<td align="center">N/2</td>
-<td align="right">N</td>
-</tr>
-<tr>
-<td>二分查找</td>
-<td align="center">lgN</td>
-<td align="right">N/2</td>
-</tr>
-<tr>
-<td>二叉树查找</td>
-<td align="center">lgN</td>
-<td align="right">lgN</td>
-</tr>
-</tbody></table>
-<p>二叉查找树平均情况下 性能还是不错的，但是在增删的情况下，无法保持平衡，最终可能退化为链表导致性能大幅度下降。</p>
-<h2 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h2><p>2-3查找树 ： 一棵空树或由2-结点和3-结点组成的树<br>2-结点：含一个键和两个链接，左链接指向的2-3树中的结点都小于该结点，右链接指向的2-3树中的结点都大于该结点s<br>3-结点：含两个键和三个链接，左链接指向的2-3树中的结点都小于该结点，右链接指向的2-3树中的结点都大于该结点，中结点指向的结点的键位于该结点两个键的中间</p>
-<p><img src="2-3_tree.png" srcset="/img/loading.gif" alt=""></p>
-<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>从根节点开始，若和节点中的</p>
-<h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>1） 如果是空树，创建一个节点并存入值<br>2） 否则找到叶子节点<br>3） 如果叶子节点只有一个值，新值也存入该节点<br>4） 如果叶子节点超过两个值，分离该节点，并把三个值的中位值提升至父节点<br>5） 如果父节点有三个值，继续4的操作 直至根节点</p>
-<pre><code class="hljs java">
-</code></pre>
-
-
-
-
-<h2 id="红黑树-1"><a href="#红黑树-1" class="headerlink" title="红黑树"></a>红黑树</h2><p>1) 根节点是黑色的<br>2) 每个节点非黑既红<br>2) 每个叶子节点都是黑色的空节点（nil）<br>3) 任何相邻的节点都不能同时为红色<br>4) 每个节点 到达其可达的叶子节点的所有路径都包含相同数目的黑色节点</p>
-<p><img src="red_black_tree.png" srcset="/img/loading.gif" alt=""></p>
-<p>（可以结合上面的2-3图一起看哟 画图不易）</p>
-<p>旋转还是挺复杂的 有空再来慢慢画图和编码 留一个坑在这里 </p>
+              <h1 id="MySQL-InnoDB内存结构"><a href="#MySQL-InnoDB内存结构" class="headerlink" title="MySQL InnoDB内存结构"></a>MySQL InnoDB内存结构</h1><p>​    MySQL 5.5以后，InnoDB成为MySQL的默认存储引擎，随着MySQL远征八方。我们不该只知道行锁和事务特性，需细致一些。</p>
+<p><img src="/../mysql_01/innodb-architecture.png" srcset="/img/loading.gif" alt="InnoDB architecture diagram showing in-memory and on-disk structures. In-memory structures include the buffer pool, adaptive hash index, change buffer, and log buffer. On-disk structures include tablespaces, redo logs, and doublewrite buffer files."></p>
+<h3 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h3><p><img src="/../mysql_01/innodb-buffer-pool-list.png" srcset="/img/loading.gif" alt="Content is described in the surrounding text."></p>
+<p>1.3/8属于老生代，5/8属于新生代。</p>
+<p>2.midpoint位于新生代的尾部，新生代的头部</p>
+<p>3.当InnoDB读取页到buffer pool时候，初始插到中点（既老生代的头部），页面对于有用户发起SQL或InnoDB预读机制。</p>
+<p>4.访问老生代中的页会使之移动到新生代的头部，让它变年轻。如果是用户操作读取命中页，第一次访问则直接放在头部。</p>
+<p>5.随着数据库的运行，缓冲池中未被访问的页将“老化” ,移至列表的末尾。新生代和老生代中的页都会随着其他页的更新而老化。随着将页插入midpoint，老生代的页也会老化。最终，未使用的页到达老生代的尾部并被逐出。</p>
+<p> innodb_old_blocks_pct   老生代块比例</p>
+<p> innodb_old_blocks_time 老生代块时间（放入老生代多久后命中操作才会放入新生代）</p>
+<h3 id="Change-Buffer"><a href="#Change-Buffer" class="headerlink" title="Change Buffer"></a>Change Buffer</h3><p>change buffer是一种特殊的数据结构，用于在二级索引页不在缓冲池中时将更改缓存到二级索引页。可能由INSERT，UPDATE或DELETE操作（DML）导致的缓冲更改将在以后通过其他读取操作将页面加载到缓冲池中时合并。</p>
+<p><img src="/../gitlab-runner/innodb-change-buffer.png" srcset="/img/loading.gif" alt="Content is described in the surrounding text."></p>
 
             </article>
             <hr>
@@ -353,7 +226,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/algorithm/">algorithm</a>
+                      <a class="hover-with-bg" href="/categories/MySQL/">MySQL</a>
                     
                   </div>
                 
@@ -361,9 +234,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/algorithm/">algorithm</a>
-                    
-                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
                     
                   </div>
                 
@@ -376,9 +247,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/20/Redis%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                      <a href="/2021/07/05/docker%E5%AD%A6%E4%B9%A01/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Redis 数据结构</span>
+                        <span class="hidden-mobile">docker学习1</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -386,8 +257,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/04/just-sort/">
-                        <span class="hidden-mobile">Just Sort</span>
+                      <a href="/2021/03/02/JAVA%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF%E4%BA%8C/">
+                        <span class="hidden-mobile">JAVA成神之路二</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -554,7 +425,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "红黑树&nbsp;",
+        "InnoDB In-Memory Structures&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

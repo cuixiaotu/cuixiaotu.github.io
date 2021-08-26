@@ -4,6 +4,131 @@
   
   
   <entry>
+    <title>docker学习4</title>
+    <link href="/2021/07/08/docker%E5%AD%A6%E4%B9%A04/"/>
+    <url>/2021/07/08/docker%E5%AD%A6%E4%B9%A04/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Docker学习4"><a href="#Docker学习4" class="headerlink" title="Docker学习4"></a>Docker学习4</h1><h2 id="1-docker实战"><a href="#1-docker实战" class="headerlink" title="1.docker实战"></a>1.docker实战</h2><p>构建并运行镜像作为容器 </p><p>使用 Docker Hub 共享镜像 </p><p>使用多个容器和一个数据库部署 Docker 应用程序 </p><p>使用 Docker Compose 运行应用程序</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Docker</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>docker学习3</title>
+    <link href="/2021/07/07/docker%E5%AD%A6%E4%B9%A03/"/>
+    <url>/2021/07/07/docker%E5%AD%A6%E4%B9%A03/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Docker学习3"><a href="#Docker学习3" class="headerlink" title="Docker学习3"></a>Docker学习3</h1><h2 id="1-docker服务命令"><a href="#1-docker服务命令" class="headerlink" title="1.docker服务命令"></a>1.docker服务命令</h2><pre><code class="hljs sh"><span class="hljs-comment"># 启动docker</span>systemctl start docker <span class="hljs-comment"># 停止docker</span>systemctl stop docker <span class="hljs-comment"># 查看docker进程状态</span>systemctl status docker <span class="hljs-comment"># 重启docker</span>systemctl restart docker <span class="hljs-comment"># 开机重启docker</span>systemctl <span class="hljs-built_in">enable</span> docker</code></pre><h2 id="2-docker-镜像命令"><a href="#2-docker-镜像命令" class="headerlink" title="2.docker 镜像命令"></a>2.docker 镜像命令</h2><h3 id="2-1-查看镜像"><a href="#2-1-查看镜像" class="headerlink" title="2.1 查看镜像"></a>2.1 查看镜像</h3><pre><code class="hljs sh"><span class="hljs-comment"># 查看本地镜像</span>docker images<span class="hljs-comment"># 查看镜像详细情况</span>docker inspect ubuntu:18.04<span class="hljs-comment"># 查看镜像构建过程</span>docker <span class="hljs-built_in">history</span> ubuntu:18.04</code></pre><h3 id="2-2-搜索镜像"><a href="#2-2-搜索镜像" class="headerlink" title="2.2 搜索镜像"></a>2.2 搜索镜像</h3><pre><code class="hljs sh">docker search keyword--filter=is-official=<span class="hljs-literal">true</span> --filter=start=1000</code></pre><h3 id="2-3-搜索镜像"><a href="#2-3-搜索镜像" class="headerlink" title="2.3 搜索镜像"></a>2.3 搜索镜像</h3><pre><code class="hljs sh"><span class="hljs-comment"># 默认从Docker Hub镜像源下载镜像（配置加速地址） name镜像仓库名称  tag标签（不加会取lastest）</span>docker pull IMAGE[:TAG]docker pull ubantu:18.04<span class="hljs-comment"># 直接运行</span>docker run -it ubuntu:18.04</code></pre><h3 id="2-4-删除镜像"><a href="#2-4-删除镜像" class="headerlink" title="2.4 删除镜像"></a>2.4 删除镜像</h3><pre><code class="hljs sh">docker rmi IMAGE[:TAG]-f, -force：强制删除镜像，即使有容器依赖它-no-prune：不要清理未带标签的父镜像</code></pre><h2 id="3-docker-容器命令"><a href="#3-docker-容器命令" class="headerlink" title="3.docker 容器命令"></a>3.docker 容器命令</h2><h3 id="3-1-查看容器"><a href="#3-1-查看容器" class="headerlink" title="3.1 查看容器"></a>3.1 查看容器</h3><pre><code class="hljs sh"><span class="hljs-comment"># 查看正在运行的容器</span>docker ps<span class="hljs-comment"># 查看所有容器</span>docker ps -a</code></pre><h3 id="3-2-创建启动容器"><a href="#3-2-创建启动容器" class="headerlink" title="3.2 创建启动容器"></a>3.2 创建启动容器</h3><pre><code class="hljs sh">docker run -it IMAGE[:TAG] COMMAND-d 后台执行-i 保持一直运行-t 分配终端--name=<span class="hljs-string">''</span> 起名</code></pre><h3 id="3-3-进入容器"><a href="#3-3-进入容器" class="headerlink" title="3.3 进入容器"></a>3.3 进入容器</h3><pre><code class="hljs sh"><span class="hljs-comment"># 后台运行程序同s进入程序</span>docker <span class="hljs-built_in">exec</span> -it IMAGE[:TAG] COMMAND-d 后台执行-i 保持一直运行-t 分配终端--name=<span class="hljs-string">''</span> 起名<span class="hljs-comment"># 后台先运行程序 再进入程序</span>docker <span class="hljs-built_in">exec</span> -id IMAGE[:TAG]docker <span class="hljs-built_in">exec</span> -it name/IMAGE[:TAG] COMMAND</code></pre><h3 id="3-4-启动容器"><a href="#3-4-启动容器" class="headerlink" title="3.4 启动容器"></a>3.4 启动容器</h3><pre><code class="hljs sh">docker run 容器名/容器ID</code></pre><h3 id="3-5-删除容器"><a href="#3-5-删除容器" class="headerlink" title="3.5 删除容器"></a>3.5 删除容器</h3><pre><code class="hljs sh">docker rm 容器名/容器ID</code></pre><h3 id="3-6-查看容器详情"><a href="#3-6-查看容器详情" class="headerlink" title="3.6 查看容器详情"></a>3.6 查看容器详情</h3><pre><code class="hljs sh">docker inspect 容器名/容器ID</code></pre><h3 id="其他参数"><a href="#其他参数" class="headerlink" title="其他参数"></a>其他参数</h3><pre><code class="hljs angelscript"><span class="hljs-number">1.</span> -f, --filter filter：过滤输出内容；<span class="hljs-number">2.</span> --format <span class="hljs-built_in">string</span>：格式化输出内容；<span class="hljs-number">3.</span> --limit <span class="hljs-built_in">int</span>：限制输出结果个数，默认为<span class="hljs-number">25</span>个；<span class="hljs-number">4.</span> --no-trunc：不截断输出结果。</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Docker</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>docker学习2</title>
+    <link href="/2021/07/06/docker%E5%AD%A6%E4%B9%A02/"/>
+    <url>/2021/07/06/docker%E5%AD%A6%E4%B9%A02/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Docker学习2"><a href="#Docker学习2" class="headerlink" title="Docker学习2"></a>Docker学习2</h1><h2 id="1-docker安装"><a href="#1-docker安装" class="headerlink" title="1.docker安装"></a>1.docker安装</h2><h4 id="1-1-官方仓库安装"><a href="#1-1-官方仓库安装" class="headerlink" title="1.1 官方仓库安装"></a>1.1 官方仓库安装</h4><pre><code class="hljs sh"><span class="hljs-comment"># 官方推荐使用官方仓库安装 方便安装和更新docker</span><span class="hljs-comment"># 更新apt包  允许apt通过https使用stable仓库 </span><span class="hljs-comment"># 查看内核知道安装哪个版本</span>uname -a<span class="hljs-comment"># Linux cuixiaotu 5.4.0-77-generic #86-Ubuntu SMP Thu Jun 17 02:35:03 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux</span>cat /proc/version<span class="hljs-comment"># Linux version 5.4.0-77-generic (buildd@lgw01-amd64-028) (gcc version 9.3.0 (Ubuntu 9.3.0-17ubuntu1~20.04)) #86-Ubuntu SMP Thu Jun 17 02:35:03 UTC 2021</span>sudo apt-get updatesudo apt-get install \    apt-transport-https \    ca-certificates \    curl \    gnupg \    lsb-release    <span class="hljs-comment"># 添加Docker官方GPG密钥    </span>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg<span class="hljs-comment"># 获取当前操作系统代号</span>lsb_release -cs <span class="hljs-comment">#focal</span><span class="hljs-comment"># 以下命令设置stable仓库。 </span> <span class="hljs-built_in">echo</span> \  <span class="hljs-string">"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \</span><span class="hljs-string">  <span class="hljs-variable">$(lsb_release -cs)</span> stable"</span> | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null  sudo apt-get updatesudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre><h3 id="1-2-官方脚本安装"><a href="#1-2-官方脚本安装" class="headerlink" title="1.2 官方脚本安装"></a>1.2 官方脚本安装</h3><pre><code class="hljs sh">sudo curl -sSL https://get.docker.com | sh</code></pre><h2 id="2-安装后的配置"><a href="#2-安装后的配置" class="headerlink" title="2. 安装后的配置"></a>2. 安装后的配置</h2><p>Docker 守护进程绑定到 Unix 套接字而不是 TCP 端口。默认情况下，Unix 套接字由用户 root 拥有，其他用户只能使用 sudo 访问它。 Docker 守护进程始终以 root 用户身份运行。</p><p>如果不想在 docker 命令前加上 sudo，请创建一个名为 docker 的 Unix 组并向其中添加用户。当 Docker 守护进程启动时，它会创建一个可由 docker 组成员访问的 Unix 套接字</p><h3 id="2-1-配置Docker服务"><a href="#2-1-配置Docker服务" class="headerlink" title="2.1 配置Docker服务"></a>2.1 配置Docker服务</h3><p>为了避免每次使用Docker都需要切换身份，可以把当前用户添加到安装创建docker用户组</p><pre><code class="hljs sh">sudo groupadd docker<span class="hljs-comment"># 由于linux用户权限是再用户登录的时候加载的  分配权限后需要退出再登录</span>sudo usermod -aG docker <span class="hljs-variable">$USER</span><span class="hljs-built_in">exit</span>docker -v<span class="hljs-comment">#Docker version 20.10.7, build f0df350</span>docker run hello-wored</code></pre><h3 id="2-2-配置镜像加速器"><a href="#2-2-配置镜像加速器" class="headerlink" title="2.2 配置镜像加速器"></a>2.2 配置镜像加速器</h3><p>这里使用阿里云镜像加速器，登录阿里云-容器镜像服务-镜像加速器可获取加速地址</p><pre><code class="hljs sh">sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json &lt;&lt;-<span class="hljs-string">'EOF'</span>&#123;  <span class="hljs-string">"registry-mirrors"</span>: [<span class="hljs-string">"https://xxxxxx.mirror.aliyuncs.com"</span>]&#125;EOFsudo systemctl daemon-reloadsudo systemctl restart docker</code></pre><h2 id="3-配置启动项"><a href="#3-配置启动项" class="headerlink" title="3.配置启动项"></a>3.配置启动项</h2><pre><code class="hljs sh"><span class="hljs-comment"># docker自启</span>sudo systemctl <span class="hljs-built_in">enable</span> docker.servicesudo systemctl <span class="hljs-built_in">enable</span> containerd.service</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Docker</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>docker学习1</title>
+    <link href="/2021/07/05/docker%E5%AD%A6%E4%B9%A01/"/>
+    <url>/2021/07/05/docker%E5%AD%A6%E4%B9%A01/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Docker学习1"><a href="#Docker学习1" class="headerlink" title="Docker学习1"></a>Docker学习1</h1><h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h2><p>由于之前主技术栈是PHP，对于代码发布部署，自研了一套集成gitlab的增量覆盖发布系统，自身对这一块确实不甚了解，当在新公司开始接触node，java项目，不得不开始面对Docker，当新技术兴起时，所有的技术人不能独善其身，都需永怀一颗学徒之心。</p><h2 id="2-简介"><a href="#2-简介" class="headerlink" title="2.简介"></a>2.简介</h2><p><strong>Docker容器</strong>与虚拟机类似，但二者在原理上不同。容器是将<a href="https://zh.wikipedia.org/wiki/作業系統層虛擬化" target="_blank" rel="noopener">操作系统层虚拟化</a>，虚拟机则是虚拟化硬件，因此容器更具有便携性、高效地利用服务器。 容器更多的用于表示 软件的一个标准化单元。由于容器的标准化，因此它可以无视基础设施（Infrastructure）的差异，部署到任何一个地方。</p><h2 id="3-优势"><a href="#3-优势" class="headerlink" title="3.优势"></a>3.优势</h2><p>一次打包，到处运行。（怎么感觉和java一次编译，到处运行的概念一致，开发者无需关心底层物理硬件才是未来？）</p><ol><li><p>更快速的交付和部署</p></li><li><p>更高效的资源利用</p></li><li><p>更轻松的迁移和扩展</p></li><li><p>更简单的更新管理</p></li></ol><h2 id="4-架构"><a href="#4-架构" class="headerlink" title="4.架构"></a>4.架构</h2><p><img src="/architecture.svg" srcset="/img/loading.gif" alt="Docker 架构图"></p><h3 id="Docker-守护进程"><a href="#Docker-守护进程" class="headerlink" title="Docker 守护进程"></a>Docker 守护进程</h3><p>Docker 守护进程 ( <code>dockerd</code>) 侦听 Docker API 请求并管理 Docker 对象，例如镜像、容器、网络和卷。守护进程还可以与其他守护进程通信以管理 Docker 服务。</p><h3 id="Docker-客户端"><a href="#Docker-客户端" class="headerlink" title="Docker 客户端"></a>Docker 客户端</h3><p>Docker 客户端 ( <code>docker</code>) 是许多 Docker 用户与 Docker 交互的主要方式。当你使用类似<code>docker run</code>的命令时，客户端会将这些命令发送到<code>dockerd</code>，从而执行它们。该<code>docker</code>命令使用 Docker API。Docker 客户端可以与多个守护进程通信。</p><h3 id="Docker-镜像仓库"><a href="#Docker-镜像仓库" class="headerlink" title="Docker 镜像仓库"></a>Docker 镜像仓库</h3><p>Docker镜像仓库存储 Docker 镜像。Docker Hub 是一个任何人都可以使用的公共镜像库，Docker 默认配置为在 Docker Hub 上查找镜像。你也可以运行自己的私有仓库。</p><p>当你使用<code>docker pull</code>或<code>docker run</code>命令时，所需镜像将从你配置的镜像仓库中提取。当你使用该<code>docker push</code>命令时，你的镜像会被推送到你配置的仓库中。</p><h3 id="Docker-对象"><a href="#Docker-对象" class="headerlink" title="Docker 对象"></a>Docker 对象</h3><p>当你使用 Docker 时，你是在创建和使用镜像、容器、网络、卷、插件和其他对象。</p><h4 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h4><p>一个镜像是用于创建一个docker容器指令的只读模板。一个镜像通常是基于额外定制化另一个镜像。例如，你可以基于<code>ubuntu</code> 镜像，构建一个 Apache Web 服务器和你的应用程序，以及应用程序运行所需的配置的一个镜像。</p><p>你可以创建自己的镜像，也可以仅使用其他人创建在共仓库中发布的镜像。要构建你自己的镜像，你使用简单的语法创建一个<em>Dockerfile</em>，用于定义创建镜像和运行镜像所需的步骤。Dockerfile 中的每条指令都会在镜像中创建一个层级。当你更改 Dockerfile 并重建镜像时，只会重建那些已更改的层。这就是与其他虚拟化技术相比，镜像更轻量、小巧和快速的部分原因。</p><h4 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h4><p>容器是镜像的可运行实例。你可以使用 Docker API 或 CLI 创建、启动、停止、移动或删除容器。你可以将容器连接到一个或多个网络，为其附加存储，甚至可以根据其当前状态创建新镜像。</p><p>默认情况下，容器与其他容器和其主机相对隔离。你可以控制容器的网络、存储或其他底层子系统与其他容器或主机之间的隔离程度。</p><p>容器由其镜像以及你在创建或启动它时提供给它的任何配置选项定义。当容器被移除时，未存储到持久存储的任何状态上的更改都会消失。</p><h5 id="示例docker-run命令"><a href="#示例docker-run命令" class="headerlink" title="示例docker run命令"></a>示例<code>docker run</code>命令</h5><p>以下命令运行一个<code>ubuntu</code>容器，以交互方式附加到你的本地命令行会话，并运行<code>/bin/bash</code>.</p><pre><code class="hljs dockerfile">$ docker <span class="hljs-keyword">run</span><span class="bash"> -i -t ubuntu /bin/bash</span></code></pre><p>运行此命令时，会发生以下情况（假设你使用的是默认配置）：</p><ol><li>如果你在<code>ubuntu</code>本地没有该镜像，Docker 会从你配置的仓库中提取它，就像你<code>docker pull ubuntu</code>手动运行一样。</li><li>Docker 会创建一个新容器，就如同你手动运行命令<code>docker container create</code> 一样。</li><li>Docker 为容器分配一个读写文件系统，作为它的最后一层。这允许正在运行的容器在其本地文件系统中创建或修改文件和目录。</li><li>Docker 创建一个网络接口来连接容器和默认网络，因为你没有指定任何网络选项。这包括为容器分配 IP 地址。默认情况下，容器可以使用主机的网络连接连接到外部网络。</li><li>Docker 启动容器并执行<code>/bin/bash</code>. 由于容器以交互方式运行并附加到你的终端（由于<code>-i</code>和<code>-t</code> 标识），你可以在输出记录到终端时使用键盘提供输入。</li><li>当你键入<code>exit</code>以终止<code>/bin/bash</code>命令时，容器会停止但不会被移除。你可以重新启动它或将其删除。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Docker</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>InnoDB In-Memory Structures</title>
+    <link href="/2021/04/21/mysql_01/"/>
+    <url>/2021/04/21/mysql_01/</url>
+    
+    <content type="html"><![CDATA[<h1 id="MySQL-InnoDB内存结构"><a href="#MySQL-InnoDB内存结构" class="headerlink" title="MySQL InnoDB内存结构"></a>MySQL InnoDB内存结构</h1><p>​    MySQL 5.5以后，InnoDB成为MySQL的默认存储引擎，随着MySQL远征八方。我们不该只知道行锁和事务特性，需细致一些。</p><p><img src="/../mysql_01/innodb-architecture.png" srcset="/img/loading.gif" alt="InnoDB architecture diagram showing in-memory and on-disk structures. In-memory structures include the buffer pool, adaptive hash index, change buffer, and log buffer. On-disk structures include tablespaces, redo logs, and doublewrite buffer files."></p><h3 id="Buffer-Pool"><a href="#Buffer-Pool" class="headerlink" title="Buffer Pool"></a>Buffer Pool</h3><p><img src="/../mysql_01/innodb-buffer-pool-list.png" srcset="/img/loading.gif" alt="Content is described in the surrounding text."></p><p>1.3/8属于老生代，5/8属于新生代。</p><p>2.midpoint位于新生代的尾部，新生代的头部</p><p>3.当InnoDB读取页到buffer pool时候，初始插到中点（既老生代的头部），页面对于有用户发起SQL或InnoDB预读机制。</p><p>4.访问老生代中的页会使之移动到新生代的头部，让它变年轻。如果是用户操作读取命中页，第一次访问则直接放在头部。</p><p>5.随着数据库的运行，缓冲池中未被访问的页将“老化” ,移至列表的末尾。新生代和老生代中的页都会随着其他页的更新而老化。随着将页插入midpoint，老生代的页也会老化。最终，未使用的页到达老生代的尾部并被逐出。</p><p> innodb_old_blocks_pct   老生代块比例</p><p> innodb_old_blocks_time 老生代块时间（放入老生代多久后命中操作才会放入新生代）</p><h3 id="Change-Buffer"><a href="#Change-Buffer" class="headerlink" title="Change Buffer"></a>Change Buffer</h3><p>change buffer是一种特殊的数据结构，用于在二级索引页不在缓冲池中时将更改缓存到二级索引页。可能由INSERT，UPDATE或DELETE操作（DML）导致的缓冲更改将在以后通过其他读取操作将页面加载到缓冲池中时合并。</p><p><img src="/../gitlab-runner/innodb-change-buffer.png" srcset="/img/loading.gif" alt="Content is described in the surrounding text."></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>MySQL</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>MySQL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JAVA成神之路二</title>
     <link href="/2021/03/02/JAVA%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF%E4%BA%8C/"/>
     <url>/2021/03/02/JAVA%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF%E4%BA%8C/</url>
@@ -120,9 +245,9 @@
     
     <tags>
       
-      <tag>JAVA</tag>
-      
       <tag>algorithm</tag>
+      
+      <tag>JAVA</tag>
       
     </tags>
     
