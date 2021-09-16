@@ -17,10 +17,20 @@
   <meta name="description" content="欢迎来到崔小土的世界">
   <meta name="author" content="cuixiaotu">
   <meta name="keywords" content="">
-  <title>归档 - 崔小土的世界</title>
+  <title>Docker学习6 - 崔小土的世界</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -140,6 +150,40 @@
             </span>
 
             
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-09-16 15:38">
+      2021年9月16日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      278 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
           
@@ -150,37 +194,118 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 13 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/09/02/JAVA%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF%E4%B8%80/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">JAVA成神之路一</span>
-      <span style="float: right;">09-02</span>
-    </a>
-  
-</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Docker学习6"><a href="#Docker学习6" class="headerlink" title="Docker学习6"></a>Docker学习6</h1><h3 id="多容器应用"><a href="#多容器应用" class="headerlink" title="多容器应用"></a>多容器应用</h3><p>之前都是使用单个容器的应用，当要接入mysql时，建议分开独立部署</p>
+<ol>
+<li><p>不同于数据库的方式扩展 API 和前端</p>
+</li>
+<li><p>独立容器可以隔离稳定版本和更新版本</p>
+</li>
+<li><p>在生产中肯定不想在你的应用中发布你的数据库程序。</p>
+</li>
+<li><p>运行多个进程将需要一个进程管理器（容器只启动一个进程），增加了容器启动/关闭的复杂性</p>
+</li>
+</ol>
+<h3 id="容器网络"><a href="#容器网络" class="headerlink" title="容器网络"></a>容器网络</h3><p>如果两个容器运行在同一个网络上，则他们可以交互。</p>
+<p>让我们连接todo app和mysql。</p>
+<pre><code class="hljs sh"><span class="hljs-comment"># 创建容器网络</span>
+docker network create todo-app
+<span class="hljs-comment"># 启动mysql 官方文档：https://hub.docker.com/_/mysql/</span>
+docker run -d \
+     --network todo-app --network-alias mysql \
+     -v todo-mysql-data:/var/lib/mysql \
+     -e MYSQL_ROOT_PASSWORD=secret \
+     -e MYSQL_DATABASE=todos \
+     mysql:5.7
+<span class="hljs-comment"># 进入mysql     </span>
+docker <span class="hljs-built_in">exec</span> -it &lt;mysql-container-id&gt; mysql -u root -p secret
+show databases;</code></pre>
+
+<h3 id="连接mysql"><a href="#连接mysql" class="headerlink" title="连接mysql"></a>连接mysql</h3><p>使用<a href="https://github.com/nicolaka/netshoot" target="_blank" rel="noopener">nicolaka/netshoot</a> 来进行网络调试</p>
+<pre><code class="hljs sh">
+docker run -it --network todo-app nicolaka/netshoot
 
 
+<span class="hljs-comment">#使用dig命令找出mysql 的 IP 地址。</span>
+dig mysql
+<span class="hljs-comment"># 在下图 ANSWER SECTION中可以看到mysql的解析地址</span></code></pre>
 
+<p><img src="Docker%E5%AD%A6%E4%B9%A06/image-20210916161503613.png" srcset="/img/loading.gif" alt="image-20210916161503613"></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Docker/">Docker</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Docker/">Docker</a>
+                    
+                  </div>
+                
               </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/14/Docker%E5%AD%A6%E4%B9%A05/">
+                        <span class="hidden-mobile">Docker学习5</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
+
+            
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -269,6 +394,8 @@
 
   
     
+      <script  src="/js/lazyload.js" ></script>
+    
   
 
 
@@ -284,6 +411,31 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -291,7 +443,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "Docker学习6&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -306,6 +458,21 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
 
 
   <script  src="/js/local-search.js" ></script>
@@ -319,6 +486,20 @@
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 

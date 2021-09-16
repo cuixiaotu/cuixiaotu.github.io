@@ -164,6 +164,100 @@
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2021/09/16/Docker%E5%AD%A6%E4%B9%A06/">Docker学习6</a>
+
+      <a href="/2021/09/16/Docker%E5%AD%A6%E4%B9%A06/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Docker学习6多容器应用之前都是使用单个容器的应用，当要接入mysql时，建议分开独立部署
+
+不同于数据库的方式扩展 API 和前端
+
+独立容器可以隔离稳定版本和更新版本
+
+在生产中肯定不想在你的应用中发布你的数据库程序。
+
+运行多个进程将需要一个进程管理器（容器只启动一个进程），增加了容器启动/关闭的复杂性
+
+
+容器网络如果两个容器运行在同一个网络上，则他们可以交互。
+让我们连接todo a</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-09-16
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Docker/">Docker</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2021/09/14/Docker%E5%AD%A6%E4%B9%A05/">Docker学习5</a>
+
+      <a href="/2021/09/14/Docker%E5%AD%A6%E4%B9%A05/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Docker学习5持久化DB在学习4中每次重启项目后，上次添加的todo list没了。当容器运行时，它会将镜像中的多个层用于其文件系统。每个容器也有自己的“暂存空间”来创建/更新/删除文件。即使使用相同的镜像，任何更改都不会在另一个容器中看到。
+#举一个栗子 
+docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt &amp</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-09-14
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Docker/">Docker</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
       <a class="index-header" href="/2021/07/08/docker%E5%AD%A6%E4%B9%A04/">docker学习4</a>
 
       <a href="/2021/07/08/docker%E5%AD%A6%E4%B9%A04/" class="index-excerpt">
@@ -171,10 +265,10 @@
         
           
         
-        <div>Docker学习41.docker实战构建并运行镜像作为容器 
-使用 Docker Hub 共享镜像 
-使用多个容器和一个数据库部署 Docker 应用程序 
-使用 Docker Compose 运行应用程序
+        <div>Docker学习41.docker实战-构建简单应用项目准备
+按照官网简单的创建一个docker项目。项目地址：https://github.com/docker/getting-started/tree/master/app。
+在与package.json同级目录下创建一个Dockerfile文件（无后缀），编写如下代码（以后再解释）：
+# syntax=docker/dockerfile:1
 </div>
       </a>
 
@@ -501,98 +595,6 @@ wget https://github.com/alibaba/dragonwell8/releases/download/dragonwell-8.5.5_j
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JAVA/">JAVA</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/08/20/Redis%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Redis 数据结构</a>
-
-      <a href="/2020/08/20/Redis%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="index-excerpt">
-        
-        
-          
-        
-        <div>Redis 数据结构最近又重新看了一遍Redis 整理一下阅读笔记
-1.redis支持的数据结构字符串，哈希，列表，集合，有序集合string，hash,list,set,sorted set
-2.redis内部的数据结构简单动态字符串双向链表压缩链表哈希表跳表整数数组
-3.数据结构关系如下
-4.内部数据结构介绍4.1 简单动态字符串struct sdshdr &#123;
-    //记录buf</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-08-20
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/redis/">redis</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Redis/">Redis</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/07/17/%E7%BA%A2%E9%BB%91%E6%A0%91/">红黑树</a>
-
-      <a href="/2020/07/17/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="index-excerpt">
-        
-        
-          
-        
-        <div>红黑树二分查找法有序数组查找有序数组的查找使用二分查找可以减少比较次数
-public int rank(Key key)&#123;
-    int lo = 0,hi = N -1;
-    while (lo &lt;= hi)&#123;
-        int mid = (hi-lo)/2 + lo;
-        int cmp = key.compareTo(keys[mid]);</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-17
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/algorithm/">algorithm</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/algorithm/">algorithm</a>
             
               <a href="/tags/JAVA/">JAVA</a>
             

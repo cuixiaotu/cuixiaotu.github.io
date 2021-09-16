@@ -164,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      565 字
+      609 字
     </span>
   
 
@@ -250,11 +250,17 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre>
 <h2 id="2-安装后的配置"><a href="#2-安装后的配置" class="headerlink" title="2. 安装后的配置"></a>2. 安装后的配置</h2><p>Docker 守护进程绑定到 Unix 套接字而不是 TCP 端口。默认情况下，Unix 套接字由用户 root 拥有，其他用户只能使用 sudo 访问它。 Docker 守护进程始终以 root 用户身份运行。</p>
 <p>如果不想在 docker 命令前加上 sudo，请创建一个名为 docker 的 Unix 组并向其中添加用户。当 Docker 守护进程启动时，它会创建一个可由 docker 组成员访问的 Unix 套接字</p>
 <h3 id="2-1-配置Docker服务"><a href="#2-1-配置Docker服务" class="headerlink" title="2.1 配置Docker服务"></a>2.1 配置Docker服务</h3><p>为了避免每次使用Docker都需要切换身份，可以把当前用户添加到安装创建docker用户组</p>
-<pre><code class="hljs sh">sudo groupadd docker
+<pre><code class="hljs sh"><span class="hljs-comment">#新增一个用户</span>
+adduser theodore
+
+sudo groupadd docker
 
 <span class="hljs-comment"># 由于linux用户权限是再用户登录的时候加载的  分配权限后需要退出再登录</span>
 sudo usermod -aG docker <span class="hljs-variable">$USER</span>
+<span class="hljs-comment"># 可以用root账号把新用户添加到sudo组</span>
+usermod -aG sudo theodore
 
+<span class="hljs-comment"># linux权限在登录时验证缓存，新增f后需重新</span>
 <span class="hljs-built_in">exit</span>
 
 docker -v

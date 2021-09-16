@@ -17,7 +17,7 @@
   <meta name="description" content="欢迎来到崔小土的世界">
   <meta name="author" content="cuixiaotu">
   <meta name="keywords" content="">
-  <title>docker学习4 - 崔小土的世界</title>
+  <title>Docker学习5 - 崔小土的世界</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -153,8 +153,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2021-07-08 10:41">
-      2021年7月8日 上午
+    <time datetime="2021-09-14 15:13">
+      2021年9月14日 下午
     </time>
   </div>
 
@@ -164,7 +164,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      464 字
+      624 字
     </span>
   
 
@@ -174,7 +174,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -205,67 +205,77 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="Docker学习4"><a href="#Docker学习4" class="headerlink" title="Docker学习4"></a>Docker学习4</h1><h2 id="1-docker实战-构建简单应用"><a href="#1-docker实战-构建简单应用" class="headerlink" title="1.docker实战-构建简单应用"></a>1.docker实战-构建简单应用</h2><p>项目准备</p>
-<p>按照官网简单的创建一个docker项目。项目地址：<a href="https://github.com/docker/getting-started/tree/master/app。" target="_blank" rel="noopener">https://github.com/docker/getting-started/tree/master/app。</a></p>
-<p>在与package.json同级目录下创建一个Dockerfile文件（无后缀），编写如下代码（以后再解释）：</p>
-<pre><code class="hljs dockerfile"><span class="hljs-comment"># syntax=docker/dockerfile:1</span>
-<span class="hljs-keyword">FROM</span> node:<span class="hljs-number">12</span>-alpine
-
-<span class="hljs-keyword">RUN</span><span class="bash"> apk add --no-cache python g++ make</span>
-<span class="hljs-keyword">WORKDIR</span><span class="bash"> /app</span>
-<span class="hljs-keyword">COPY</span><span class="bash"> . .</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> yarn install --production</span>
-<span class="hljs-keyword">CMD</span><span class="bash"> [<span class="hljs-string">"node"</span>,<span class="hljs-string">"src/index.js"</span>]</span></code></pre>
-
-<p> 构建镜像</p>
-<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> -t tag 打上标签方便阅读</span>
-docker build -t getting-started .</code></pre>
-
-<p>后台运行命令</p>
-<pre><code class="hljs sh"><span class="hljs-comment"># -d 后台运行</span>
-<span class="hljs-comment"># -p 端口映射</span>
-docker run -dp 3000:3000 getting-started</code></pre>
-
-<p>此时访问localhost:3000(远程服务器自己换地址)就会出现如下页面：<img src="/image-20210907175412343.png" srcset="/img/loading.gif" alt="image-20210907175412343"></p>
-<h2 id="2-更新项目"><a href="#2-更新项目" class="headerlink" title="2.更新项目"></a>2.更新项目</h2><p>在<code>src/static/js/app.js</code> 文件中,更新第56行。</p>
-<pre><code class="hljs armasm">-                &lt;p className=<span class="hljs-string">"text-center"</span>&gt;No <span class="hljs-keyword">items </span>yet! <span class="hljs-keyword">Add </span>one above!&lt;/p&gt;
-+                &lt;p className=<span class="hljs-string">"text-center"</span>&gt;You have no todo <span class="hljs-keyword">items </span>yet! <span class="hljs-keyword">Add </span>one above!&lt;/p&gt;</code></pre>
-
-
-
-<p>重新构建镜像后重启项目</p>
-<pre><code class="hljs sh">docker build -t getting-started .
-docker run -dp 3000:3000 getting-started</code></pre>
-
-<p>发现端口被占用</p>
-<p><img src="/image-20210907180218103-16310089406632.png" srcset="/img/loading.gif" alt="image-20210907180218103"></p>
-<pre><code class="hljs sh"><span class="hljs-comment"># 关闭之前的容器</span>
+              <h1 id="Docker学习5"><a href="#Docker学习5" class="headerlink" title="Docker学习5"></a>Docker学习5</h1><h2 id="持久化DB"><a href="#持久化DB" class="headerlink" title="持久化DB"></a>持久化DB</h2><p>在学习4中每次重启项目后，上次添加的todo list没了。当容器运行时，它会将镜像中的多个层用于其文件系统。每个容器也有自己的“暂存空间”来创建/更新/删除文件。即使使用相同的镜像，任何更改都不会在另一个容器中看到。</p>
+<pre><code class="hljs sh"><span class="hljs-comment">#举一个栗子 </span>
+docker run -d ubuntu bash -c <span class="hljs-string">"shuf -i 1-10000 -n 1 -o /data.txt &amp;&amp; tail -f /dev/null"</span>
+<span class="hljs-comment">#查看运行中容器</span>
 docker ps
-<span class="hljs-comment"># 找到之前容器的容器ID</span>
-docker stop &lt;the-container-id&gt;
-<span class="hljs-comment"># 移除容器</span>
-docker rm &lt;the-container-id&gt;</code></pre>
+<span class="hljs-comment">#宿主机上并没有该文件</span>
+cat /data
+<span class="hljs-comment">#查看容器内文件</span>
+docker <span class="hljs-built_in">exec</span> 8957d28f0adc（容器ID） cat /data.txt</code></pre>
+
+<h3 id="volume"><a href="#volume" class="headerlink" title="volume"></a>volume</h3><p>volume提供将容器的特定文件系统路径连接回主机的能力。如果挂载了容器中的目录，主机上也会看到该目录中的更改。如果我们在容器重启时挂载相同的目录，我们会看到相同的文件。</p>
+<h3 id="持久化todo-list"><a href="#持久化todo-list" class="headerlink" title="持久化todo list"></a>持久化todo list</h3><pre><code class="hljs sh"><span class="hljs-comment">#创建volume</span>
+docke volume create todo-db
+<span class="hljs-comment">#挂载volume并运行镜像</span>
+docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+<span class="hljs-comment">#等网页新增todo后，docker ps出来 rm -f掉，再启另外一个容器 发现数据还在</span>
+docker volume inspect todo-db
+<span class="hljs-comment">#操作网页的同时 发现_data文件变化</span>
+ll /var/lib/docker/volumes/todo-db/_data</code></pre>
+
+<p><img src="Docker%E5%AD%A6%E4%B9%A05/image-20210914164030025.png" srcset="/img/loading.gif" alt="image-20210914164030025"></p>
+<h3 id="使用挂载"><a href="#使用挂载" class="headerlink" title="使用挂载"></a>使用挂载</h3><p>如果我们只想存储数据，命名卷非常有用，因为我们不必担心数据存储在哪里。</p>
+<p>快速卷类型比较 绑定挂载和命名卷是 Docker 引擎附带的两种主要类型的卷。但是，额外的卷驱动程序可用于支持其他用例（SFTP、Ceph、NetApp、S3 等）</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Named Volumes</strong></th>
+<th><strong>Bind Mounts</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Host Location</td>
+<td>Docker默认</td>
+<td>自己控制</td>
+</tr>
+<tr>
+<td>挂载示例 (using <code>-v</code>)</td>
+<td>my-volume:/usr/local/data</td>
+<td>/path/to/data:/usr/local/data</td>
+</tr>
+<tr>
+<td>容器内容填充volumes</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>支持Volume驱动</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+</tbody></table>
+<h3 id="启动开发模式容器"><a href="#启动开发模式容器" class="headerlink" title="启动开发模式容器"></a>启动开发模式容器</h3><pre><code class="hljs sh"> docker run -dp 3000:3000 \
+     -w /app -v <span class="hljs-string">"<span class="hljs-variable">$(pwd)</span>:/app"</span> \
+     node:12-alpine \
+     sh -c <span class="hljs-string">"yarn install &amp;&amp; yarn run dev"</span>
+     
+<span class="hljs-comment"># -w /app 设置“工作目录”或命令将运行的当前目录 </span>
+<span class="hljs-comment"># -v "$(pwd):/app" 将容器中宿主机的当前目录绑定挂载到/app目录中</span>
+<span class="hljs-comment"># node:12-alpine 使用的node环境镜像</span>
+<span class="hljs-comment"># sh -c "yarn install &amp;&amp; yarn run dev"</span>
 
 
+docker ps
 
-<pre><code class="hljs angelscript">docker run -dp <span class="hljs-number">3000</span>:<span class="hljs-number">3000</span> getting-started</code></pre>
+<span class="hljs-comment">#查看该容器日志</span>
+docker logs -f &lt;container-id&gt;
 
+<span class="hljs-comment">#当修改src/static/js/app.js文件后 日志显示服务重启 刷新后页面更新</span>
+<span class="hljs-comment">#开发机有docker情况下 无需配置环境 即可使用docker拉取开发环境</span></code></pre>
 
-
-<p>此时访问localhost:3000(远程服务器自己换地址)就会出现如下页面：<img src="/image-20210907180946240.png" srcset="/img/loading.gif" alt="image-20210907180946240"></p>
-<p>一个项目的docker构建就是这样了，如何交付呢？</p>
-<h2 id="3-上传项目"><a href="#3-上传项目" class="headerlink" title="3.上传项目"></a>3.上传项目</h2><pre><code class="hljs sh"><span class="hljs-comment"># 登录自家的仓库地址 热心的运维会配置好这些基本环境（练习省略SERVER 默认使用官方仓库）</span>
-docker login SERVER
-
-docker tag getting-started cuixiaotu/getting-started
-
-docker push cuixiaotu/getting-started</code></pre>
-
-
-
-<p><img src="docker%E5%AD%A6%E4%B9%A04/image-20210914150054507.png" srcset="/img/loading.gif" alt="image-20210914150054507"></p>
-<p>如此这般，在其他服务器上可以pull镜像下来，直接运行就可以了。</p>
-<p>实际运用中CI 管道中很常见，管道将创建镜像并将其推送到仓库，然后生产/c测试环境可以使用最新版本的镜像。</p>
 
             </article>
             <hr>
@@ -296,9 +306,9 @@ docker push cuixiaotu/getting-started</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/14/Docker%E5%AD%A6%E4%B9%A05/">
+                      <a href="/2021/09/16/Docker%E5%AD%A6%E4%B9%A06/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Docker学习5</span>
+                        <span class="hidden-mobile">Docker学习6</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -306,8 +316,8 @@ docker push cuixiaotu/getting-started</code></pre>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2021/07/07/docker%E5%AD%A6%E4%B9%A03/">
-                        <span class="hidden-mobile">docker学习3</span>
+                      <a href="/2021/07/08/docker%E5%AD%A6%E4%B9%A04/">
+                        <span class="hidden-mobile">docker学习4</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -474,7 +484,7 @@ docker push cuixiaotu/getting-started</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "docker学习4&nbsp;",
+        "Docker学习5&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
