@@ -164,6 +164,101 @@
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2021/09/18/Docker%E5%AD%A6%E4%B9%A08/">Docker学习8</a>
+
+      <a href="/2021/09/18/Docker%E5%AD%A6%E4%B9%A08/" class="index-excerpt">
+        
+        
+          
+        
+        <div>镜像构建安全扫描当构建完镜像后可以使用docker scan扫描安全漏洞
+
+镜像分层使用docker image history 查看分层，为了不省略可以用 –no-trunc
+
+分层缓存使用分层缓存可以减少镜像构建时间
+先构建一次 看下大致用时
+
+修改Dockerfile文件
+FROM node:12-alpine
+WORKDIR /app
+COPY package.json yarn.lock</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-09-18
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Docker/">Docker</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2021/09/16/Docker%E5%AD%A6%E4%B9%A07/">Docker学习7</a>
+
+      <a href="/2021/09/16/Docker%E5%AD%A6%E4%B9%A07/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Docker ComposeDocker Compose 是一种工具，旨在帮助定义和共享多容器应用程序。使用 Compose，我们可以创建一个 YAML 文件来定义服务，并且可以使用单个命令来启动或拆除所有内容。
+Compose 的优势是可以在文件中定义应用程序堆栈，将其保存在项目的根目录下。
+# 查看下docker是否安装
+docker-compose version 
+# 没有的话就安装下
+s</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-09-16
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Docker/">Docker</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
       <a class="index-header" href="/2021/09/16/Docker%E5%AD%A6%E4%B9%A06/">Docker学习6</a>
 
       <a href="/2021/09/16/Docker%E5%AD%A6%E4%B9%A06/" class="index-excerpt">
@@ -503,92 +598,6 @@ Buffer Pool
             <i class="iconfont icon-category"></i>
             
               <a href="/categories/JAVA/">JAVA</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JAVA/">JAVA</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2021/02/20/%E7%AB%AF%E5%AF%B9%E7%AB%AF%E5%8A%A0%E5%AF%86/">端对端加密</a>
-
-      <a href="/2021/02/20/%E7%AB%AF%E5%AF%B9%E7%AB%AF%E5%8A%A0%E5%AF%86/" class="index-excerpt">
-        
-        
-          
-        
-        <div>端对端加密1.简介
-End-to-end encryption (E2EE) is a system of communication where only the communicating users can read the messages. In principle, it prevents potential eavesdroppers – including telecom prov</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2021-02-20
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/IM/">IM</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/IM/">IM</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/09/02/JAVA%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF%E4%B8%80/">JAVA成神之路一</a>
-
-      <a href="/2020/09/02/JAVA%E6%88%90%E7%A5%9E%E4%B9%8B%E8%B7%AF%E4%B8%80/" class="index-excerpt">
-        
-        
-          
-        
-        <div>JAVA成神之路一1.安装部署​    
-
-linux部署 还是得用openJava 其中阿里的开源dragonwell不错
-
-wget https://github.com/alibaba/dragonwell8/releases/download/dragonwell-8.5.5_jdk8u275-ga/Alibaba_Dragonwell_8.5.5-GA_Linux_x64.tar.gz
-</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-09-02
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/java/">java</a>
             
           </div>
         
