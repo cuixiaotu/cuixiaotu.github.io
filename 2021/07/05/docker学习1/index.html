@@ -218,7 +218,7 @@
 <li><p>更简单的更新管理</p>
 </li>
 </ol>
-<h2 id="4-架构"><a href="#4-架构" class="headerlink" title="4.架构"></a>4.架构</h2><p><img src="/architecture.svg" srcset="/img/loading.gif" alt="Docker 架构图"></p>
+<h2 id="4-架构"><a href="#4-架构" class="headerlink" title="4.架构"></a>4.架构</h2><p><img src="./architecture.svg" srcset="/img/loading.gif" alt="Docker 架构图"></p>
 <h3 id="Docker-守护进程"><a href="#Docker-守护进程" class="headerlink" title="Docker 守护进程"></a>Docker 守护进程</h3><p>Docker 守护进程 ( <code>dockerd</code>) 侦听 Docker API 请求并管理 Docker 对象，例如镜像、容器、网络和卷。守护进程还可以与其他守护进程通信以管理 Docker 服务。</p>
 <h3 id="Docker-客户端"><a href="#Docker-客户端" class="headerlink" title="Docker 客户端"></a>Docker 客户端</h3><p>Docker 客户端 ( <code>docker</code>) 是许多 Docker 用户与 Docker 交互的主要方式。当你使用类似<code>docker run</code>的命令时，客户端会将这些命令发送到<code>dockerd</code>，从而执行它们。该<code>docker</code>命令使用 Docker API。Docker 客户端可以与多个守护进程通信。</p>
 <h3 id="Docker-镜像仓库"><a href="#Docker-镜像仓库" class="headerlink" title="Docker 镜像仓库"></a>Docker 镜像仓库</h3><p>Docker镜像仓库存储 Docker 镜像。Docker Hub 是一个任何人都可以使用的公共镜像库，Docker 默认配置为在 Docker Hub 上查找镜像。你也可以运行自己的私有仓库。</p>

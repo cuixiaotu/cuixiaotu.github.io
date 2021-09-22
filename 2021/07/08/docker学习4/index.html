@@ -226,7 +226,7 @@ docker build -t getting-started .</code></pre>
 <span class="hljs-comment"># -p 端口映射</span>
 docker run -dp 3000:3000 getting-started</code></pre>
 
-<p>此时访问localhost:3000(远程服务器自己换地址)就会出现如下页面：<img src="/image-20210907175412343.png" srcset="/img/loading.gif" alt="image-20210907175412343"></p>
+<p>此时访问localhost:3000(远程服务器自己换地址)就会出现如下页面：<img src="./image-20210907175412343.png" srcset="/img/loading.gif" alt="image-20210907175412343"></p>
 <h2 id="2-更新项目"><a href="#2-更新项目" class="headerlink" title="2.更新项目"></a>2.更新项目</h2><p>在<code>src/static/js/app.js</code> 文件中,更新第56行。</p>
 <pre><code class="hljs armasm">-                &lt;p className=<span class="hljs-string">"text-center"</span>&gt;No <span class="hljs-keyword">items </span>yet! <span class="hljs-keyword">Add </span>one above!&lt;/p&gt;
 +                &lt;p className=<span class="hljs-string">"text-center"</span>&gt;You have no todo <span class="hljs-keyword">items </span>yet! <span class="hljs-keyword">Add </span>one above!&lt;/p&gt;</code></pre>
@@ -238,7 +238,7 @@ docker run -dp 3000:3000 getting-started</code></pre>
 docker run -dp 3000:3000 getting-started</code></pre>
 
 <p>发现端口被占用</p>
-<p><img src="/image-20210907180218103-16310089406632.png" srcset="/img/loading.gif" alt="image-20210907180218103"></p>
+<p><img src="./image-20210907180218103-16310089406632.png" srcset="/img/loading.gif" alt="image-20210907180218103"></p>
 <pre><code class="hljs sh"><span class="hljs-comment"># 关闭之前的容器</span>
 docker ps
 <span class="hljs-comment"># 找到之前容器的容器ID</span>
@@ -252,7 +252,7 @@ docker rm &lt;the-container-id&gt;</code></pre>
 
 
 
-<p>此时访问localhost:3000(远程服务器自己换地址)就会出现如下页面：<img src="/image-20210907180946240.png" srcset="/img/loading.gif" alt="image-20210907180946240"></p>
+<p>此时访问localhost:3000(远程服务器自己换地址)就会出现如下页面：<img src="./image-20210907180946240.png" srcset="/img/loading.gif" alt="image-20210907180946240"></p>
 <p>一个项目的docker构建就是这样了，如何交付呢？</p>
 <h2 id="3-上传项目"><a href="#3-上传项目" class="headerlink" title="3.上传项目"></a>3.上传项目</h2><pre><code class="hljs sh"><span class="hljs-comment"># 登录自家的仓库地址 热心的运维会配置好这些基本环境（练习省略SERVER 默认使用官方仓库）</span>
 docker login SERVER
@@ -263,7 +263,7 @@ docker push cuixiaotu/getting-started</code></pre>
 
 
 
-<p><img src="docker%E5%AD%A6%E4%B9%A04/image-20210914150054507.png" srcset="/img/loading.gif" alt="image-20210914150054507"></p>
+<p><img src="./image-20210914150054507.png" srcset="/img/loading.gif" alt="image-20210914150054507"></p>
 <p>如此这般，在其他服务器上可以pull镜像下来，直接运行就可以了。</p>
 <p>实际运用中CI 管道中很常见，管道将创建镜像并将其推送到仓库，然后生产/c测试环境可以使用最新版本的镜像。</p>
 
